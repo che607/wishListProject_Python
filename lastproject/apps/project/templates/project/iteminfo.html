@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Item Info</title>
+  </head>
+  <body>
+    <a href="{% url 'project:wishlist' %}">Home</a>
+    <br>
+    <a href="{% url 'project:logout' %}">Log Out</a>
+    <br>
+    <br>
+    <br>
+    <h1>{{item.item}}</h1>
+    <br>
+    <br>
+    Users who added this product/item under their wish list:
+    <br>
+    {% for addedwish in item.the_item.all %}
+    {{addedwish.name}}<br>
+    {% endfor %}
+  </body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>My Wish List</title>
+  </head>
+  <body>
+    Hello, {{currentUser.name}}!
+    <br>
+    <a href="{% url 'project:logout' %}">Log Out</a>
+    <br>
+    <br>
+    <h1>Your Wish List</h1>
+    <table>
+      <tr>
+        <th>Item</th>
+        <th>Added By</th>
+        <th>Date Added</th>
+        <th>Action</th>
+      </tr>
+        {% for item in myitemsarr %}
+      <tr>
+        <td><a href="{% url 'project:iteminfo' item.id %}">{{ item.item }}</a></td>
+        <td>{{ item.user.name }} </td>
+        <td>{{ item.created_at }} </td>
+        <td>
+          {% if item.user.name == currentUser.name %}
+          <a href="{% url 'project:delete' item.id %}">Delete</a>
+          {% else %}
+          <a href="{% url 'project:remove' item.id %}">Remove From My Wish List</a>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+    <br>
+    <br>
+    <br>
+    <br>
+    <h1>Other User' Wish List</h1>
+    <table>
+      <tr>
+        <th>Item</th>
+        <th>Added By</th>
+        <th>Date Added</th>
+        <th>Action</th>
+      </tr>
+        {% for item in otheritemsarr %}
+      <tr>
+        <td><a href="{% url 'project:iteminfo' item.id %}">{{ item.item }}</a></td>
+        <td>{{ item.user.name }} </td>
+        <td>{{ item.created_at }} </td>
+        <td>
+          <a href="{% url 'project:add2wish' item.id %}">Add To My Wish List</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+    <br>
+    <br>
+    <a href="{% url 'project:additem' %}">Add Item</a>
+  </body>
+</html>

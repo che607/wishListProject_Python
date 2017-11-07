@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Login/Registration</title>
+    {% load staticfiles %}
+     <link rel="stylesheet" href="{% static '/css/stylesheet.css' %}" charset="utf-8">
+  </head>
+  <body>
+    <h1>Welcome</h1>
+    <br>
+    <form action='{% url 'logreg:register' %}' method='POST'>
+      {% csrf_token %}
+      Name:<input type="text" name="name">
+      <br>
+      Username:<input type="text" name="username">
+      <br>
+      Password:<input type="password" name="password">
+      <br>
+      Confirm Password:<input type="password" name="confirm">
+      <br>
+      Date of Birth:<input type="date" name="dob">
+      <br>
+      <input type="submit" value="Register">
+    </form>
+    <br>
+    <br>
+    {% for message in messages %}
+    {{message.message}}<br>
+    {% endfor %}
+    <br>
+    <br>
+    <form action='{% url 'logreg:login' %}' method='POST'>
+      {% csrf_token %}
+      Username:<input type="text" name="username">
+      <br>
+      Password:<input type="password" name="password">
+      <br>
+      <input type="submit" value="Login">
+    </form>
+  </body>
+</html>
